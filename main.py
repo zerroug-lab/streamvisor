@@ -23,5 +23,5 @@ for link in soup.find_all('a', href=True):
 print(soup.prettify())
 
 # Write the modified HTML content to a file
-with open('output.html', 'w', encoding='utf-8') as f:
+with open('index.html', 'w', encoding='utf-8') as f:
     f.write(str(soup))
