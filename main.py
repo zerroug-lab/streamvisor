@@ -11,13 +11,20 @@ response = requests.get(url)
 soup = BeautifulSoup(response.content, 'html.parser')
 
 # Remove the unwanted elements
-for element in soup.select('#topnav, #AlbaSport\_header, #colophon, .AlbaSport-main'):
+for element in soup.select('#topnav, #AlbaSport_header, #colophon, .AlbaSport-main'):
     element.extract()
 
 # Replace the old Telegram link with the new one
 for link in soup.find_all('a', href=True):
     if link['href'] == 'https://t.me/yallaosx':
         link['href'] = new_telegram_link
+
+# Update the title
+soup.title.string = 'StreamVisor'
+
+# Update the meta description
+for meta_tag in soup.find_all('meta', attrs={'name': 'description'}):
+    meta_tag['content'] = 'StreamVisor'
 
 # Print the modified HTML content
 print(soup.prettify())
